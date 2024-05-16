@@ -43,10 +43,7 @@ class WithdrawalController extends Controller
         DB::transaction(function () use ($request) {
             $user = Auth::user();
             $isIndividual = $user->account_type === 'Individual';
-            $date = Carbon::createFromDate(2024, 5, 18);
-            $dayOfWeek = $date->dayOfWeek;
-            $isFriday = $dayOfWeek === 5;
-//            $isFriday = now()->dayOfWeek === 5;
+            $isFriday = now()->dayOfWeek === 5;
             if ($isIndividual) {
                 $withdrawalRate = $isIndividual ? 0.015 : 0.025;
                 $totalWithdrawalAmount = $request->amount;
